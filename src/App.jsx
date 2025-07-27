@@ -7,12 +7,17 @@ import {
 } from "react-router";
 import Home from "./pages/Home";
 import HomeLayout from "./Layout/HomeLayout";
+import DashboardLayout from "./Layout/DashboardLayout";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path="/" element={<HomeLayout />}>
         <Route index element={<Home />} />
+      </Route>
+      <Route path='/dashboard' element={<DashboardLayout />}>
+      <Route index element={<Dashboard />} />
       </Route>
     </Route>
   )
