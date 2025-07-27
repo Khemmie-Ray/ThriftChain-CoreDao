@@ -9,6 +9,9 @@ import Home from "./pages/Home";
 import HomeLayout from "./Layout/HomeLayout";
 import DashboardLayout from "./Layout/DashboardLayout";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import IndividualSavings from "./pages/Dashboard/Savings/IndividualSavings"
+import AllSavings from "./pages/Dashboard/Savings/AllSavings"
+import CreateModule from "./pages/Dashboard/CreateModule"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,6 +21,9 @@ const router = createBrowserRouter(
       </Route>
       <Route path='/dashboard' element={<DashboardLayout />}>
       <Route index element={<Dashboard />} />
+      <Route path='/dashboard/individual-savings' element={<IndividualSavings />} />
+      <Route path='/dashboard/individual-savings/create-module' element={<CreateModule />} />
+      <Route path='/dashboard/allsavings' element={<AllSavings />} />
       </Route>
     </Route>
   )

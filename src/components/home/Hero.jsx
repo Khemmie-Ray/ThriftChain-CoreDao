@@ -3,7 +3,6 @@ import heroImg from "../../assets/hero.svg";
 import token from "../../assets/naira.svg";
 import token2 from "../../assets/usdc.svg";
 import { motion } from "framer-motion";
-import { Element } from "react-scroll";
 
 const bouncingVariants = {
   bounce: {
@@ -20,7 +19,6 @@ const bouncingVariants = {
 
 const Hero = () => {
   return (
-    <Element name="home">
     <div className="bg-gradient-to-r from-[#E9E3FF] to-white">
     <div className="hero-section relative py-10">
       <div className="w-[90%] mx-auto lg:w-[60%] md:w-[60%] text-center">
@@ -88,7 +86,6 @@ const Hero = () => {
       </div>
     </div>
     </div>
-    </Element>
   );
 };
 
