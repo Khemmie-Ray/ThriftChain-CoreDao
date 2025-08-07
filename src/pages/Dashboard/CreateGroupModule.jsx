@@ -1,7 +1,69 @@
-import React from "react";
-import { DashNav } from "../../components/shared/Reuse";
+import React, { useState } from "react";
+import { DashNav, Button } from "../../components/shared/Reuse";
+import { ethers, parseUnits } from "ethers";
+import useCreateThrift from "../../hooks/useCreateThrift";
+import { toast } from "react-toastify";
+import tokenList from "../../constants/tokenList.json";
 
 const CreateGroupModule = () => {
+  const [goalName, setGoalName] = useState("");
+  const [goalAmount, setGoalAmount] = useState("");
+  const [savingFrequency, setSavingFrequency] = useState("");
+  const [vaultAddress, setVaultAddress] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const [participant, setParticipant] = useState(1);
+
+  const handleCreate = useCreateThrift();
+
+  const handleCreateThrift = async () => {
+    const startDate = Math.floor(new Date(startTime).getTime() / 1000);
+    const endDate = Math.floor(new Date(endTime).getTime() / 1000);
+
+    if (startDate <= Math.floor(Date.now() / 1000)) {
+      toast.error("Start time cannot be in the past", {
+        position: "top-center",
+      });
+      return;
+    }
+
+    if (endDate <= startDate) {
+      toast.error("End time must be after start time", {
+        position: "top-center",
+      });
+      return;
+    }
+
+    const selectedToken = tokenList[vaultAddress];
+    if (!selectedToken) {
+      toast.error("Invalid token selected", {
+        position: "top-center",
+      });
+      return;
+    }
+
+    const goalAmountInWei = ethers.parseUnits(
+      goalAmount,
+      selectedToken.decimals
+    );
+
+    await handleCreate(
+      goalName,
+      goalAmountInWei.toString(),
+      savingFrequency,
+      vaultAddress,
+      startDate,
+      endDate,
+      participant
+    );
+    setGoalAmount("");
+    setGoalName("");
+    setParticipant(1);
+    setStartTime("");
+    setEndTime("");
+    setVaultAddress("");
+    setSavingFrequency("");
+  };
 
   return (
     <div>

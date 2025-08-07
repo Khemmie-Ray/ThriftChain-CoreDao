@@ -12,7 +12,7 @@
   --color-lightPurple: #F9F8FF;
   --color-lightgray: #BDBDBD;
   --color-textGrey: #C1C2CA;
-  --font-dmsans: "DM Sans", serif; 
+  --font-dmsans: "DM Sans", "serif"; 
 }
 
 .hero-section {
@@ -62,9 +62,6 @@
   height: 0px;
 }
 
-.custom-range {
-  --progress: 50%;
-}
 .custom-range:focus {
   outline: none;
 }

@@ -25,15 +25,15 @@ const Sidebar = () => {
 
   const savingItems = [
     { label: "Individual savings", href: "/dashboard/individual-savings" },
-    { label: "Group savings", href: "/about" },
+    { label: "Group savings", href: "/dashboard/group-savings" },
     { label: "All savings", href: "/dashboard/allsavings" },
   ];
 
-  const assetItems = [{ label: "Portfolio", href: "/" }];
+  const assetItems = [{ label: "Portfolio", href: "/dashboard/portfolio/under-construction" }];
 
   const settingsItems = [
-    { label: "Profile settings", href: "/" },
-    { label: "Bank/Account settings", href: "/about" },
+    { label: "Profile settings", href: "/dashboard/profile/under-construction" },
+    { label: "Bank/Account settings", href: "/dashboard/under-construction" },
   ];
 
   return (
@@ -45,7 +45,7 @@ const Sidebar = () => {
       <div className="px-4">
         <NavLink
           to="/dashboard"
-          className="text-[14px] text-textGrey flex items-center p-4 mb-4"
+          className="text-[16px] text-textGrey flex items-center p-4 mb-4"
           style={({ isActive }) => (isActive ? activeStyle : null)}
           end
         >
@@ -72,8 +72,8 @@ const Sidebar = () => {
         />
 
         <NavLink
-          to="chat"
-          className="text-[14px] text-textGrey flex items-center p-4 mb-4"
+          to="/dashboard/transaction/under-construction"
+          className="text-[16px] text-textGrey flex items-center p-4 mb-4"
           style={({ isActive }) => (isActive ? activeStyle : null)}
         >
           <RxCountdownTimer className="mr-2 text-[14px]" />

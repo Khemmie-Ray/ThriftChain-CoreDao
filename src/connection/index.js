@@ -1,36 +1,11 @@
 import { createAppKit } from "@reown/appkit/react";
 import { EthersAdapter } from "@reown/appkit-adapter-ethers";
-import { defineChain } from "@reown/appkit/networks";
+import { coreTestnet2 } from "@reown/appkit/networks";
 
 // 1. Get projectId
 const projectId = import.meta.env.VITE_PROJECTID;
 
-
-const crossFiTestnet = defineChain({
-  id: 4157,
-  caipNetworkId: "eip155:4157",
-  chainNamespace: "eip155",
-  name: "CrossFi Testnet",
-  nativeCurrency: {
-    decimals: 18,
-    name: "XFI",
-    symbol: "XFI",
-  },
-  rpcUrls: {
-    default: {
-      http: ["https://rpc.testnet.ms"],
-    },
-  },
-
-  blockExplorers: {
-    default: {
-      name: "XFI Scan",
-      url: "https://test.xfiscan.com",
-    },
-  },
-});
-
-const networks = [crossFiTestnet];
+const networks = [coreTestnet2];
 
 // 3. Create a metadata object - optional
 const metadata = {

@@ -7,6 +7,7 @@ import ProgressPie from "../../../components/dashboard/ProgressPie";
 import { RxDotFilled } from "react-icons/rx";
 import WithdrawCard from "../../../components/dashboard/WithdrawCard";
 import HistoryChart from "../../../components/dashboard/HistoryChart";
+import { Button } from "../../../components/shared/Reuse";
 
 const IndividualSavings = () => {
   const percentage = 70;
@@ -17,15 +18,15 @@ const IndividualSavings = () => {
       <section className="flex justify-between my-8 lg:px-8 md:px-8 px-4 items-center flex-col lg:flex-row md:flex-row">
         <div className="mb-3">
           <h2 className="lg:text-[28px] md:text-[28px] text-[20px] font-[600]">
-            Hello Duchess
+            Hello
           </h2>
           <p>Here you can manage all Individual savings</p>
         </div>
         <div className="">
-          <button className="border-lilac rounded-full border p-3 px-6 text-lilac flex justify-center items-center">
+          <Button className="border-lilac rounded-full border p-3 px-6 text-lilac flex justify-center items-center">
             <IoLogoWhatsapp className="text-green-700 mr-2 text-xl" /> Import
             from WhatsApp
-          </button>
+          </Button>
         </div>
       </section>
       <section className="flex justify-between my-8 lg:px-8 md:px-8 px-4 items-center flex-col lg:flex-row md:flex-row">

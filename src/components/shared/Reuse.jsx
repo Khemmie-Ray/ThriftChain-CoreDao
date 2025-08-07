@@ -21,9 +21,8 @@ export const DashNav = ({ children }) => {
           <MdBookmarkBorder className="mr-2"/>
           <MdNotificationsNone />
         </div>
-        <div className="text-[14px] text-right">
-          <p>Duchess</p>
-          <p>0x056ghdb89..</p>
+        <div>
+          <w3m-button />
         </div>
       </div>
     </div>

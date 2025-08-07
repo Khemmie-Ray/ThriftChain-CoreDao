@@ -57,8 +57,7 @@ const MobileSidebar = () => {
             <MdNotificationsNone />
           </div>
           <div className="text-[14px] text-right">
-            <p>Duchess</p>
-            <p>0x056ghdb89..</p>
+            <w3m-button />
           </div>
         </div>
           <div className="px-4">
