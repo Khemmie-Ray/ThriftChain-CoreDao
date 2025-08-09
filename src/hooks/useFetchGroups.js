@@ -12,6 +12,7 @@ const useFetchGroups = () => {
   const { readOnlyProvider } = useSignerOrProvider();
   const [groupThriftAll, setGroupThriftAll] = useState([]);
   const [groupThriftUser, setGroupThriftUser] = useState([]);
+  const [loading, setLoading] = useState(false)
 
   const itf = useMemo(() => new Interface(ABI), []);
   const multicallAddr = import.meta.env.VITE_MULTICALL2_ADDRESS;
@@ -46,6 +47,8 @@ const useFetchGroups = () => {
 
   const fetchGroup = useCallback(async () => {
     if (!chainId || !readOnlyProvider) return;
+
+    setLoading(true)
 
     const multicallContract = new Contract(
       multicallAddr,
@@ -86,6 +89,8 @@ const useFetchGroups = () => {
       setGroupThriftUser(decodedUser);
     } catch (error) {
       console.error("Failed to fetch individual thrifts:", error);
+    } finally {
+      setLoading(false)
     }
   }, [allGroup, groupUser, itf, multicallAddr, readOnlyProvider, chainId]);
 
@@ -96,6 +101,7 @@ const useFetchGroups = () => {
   return {
     groupThriftAll,
     groupThriftUser,
+    loading
   };
 };
 

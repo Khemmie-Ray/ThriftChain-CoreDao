@@ -3,9 +3,10 @@ import { PiVaultBold } from "react-icons/pi";
 import useFetchGroups from "../../hooks/useFetchGroups";
 import tokenList from "../../constants/tokenList.json";
 import { formatUnits } from "ethers";
+import LoadingSpinner from "../loaders/LoadingSpinner";
 
 const CreatedGroup = () => {
-  const { groupThriftUser } = useFetchGroups();
+  const { groupThriftUser, loading } = useFetchGroups();
 
   const getTokenDecimals = (currencyAddress) => {
     const token = tokenList[currencyAddress];
@@ -31,6 +32,22 @@ const CreatedGroup = () => {
       day: "numeric",
     });
   };
+
+  if (loading) {
+    return (
+      <div className="w-full flex justify-center items-center py-6">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  if (!loading && (!groupThriftUser || groupThriftUser.length === 0)) {
+    return (
+      <div className="w-full flex justify-center items-center py-6">
+        <p className="text-gray-500">No savings history found.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="w-[100%] flex justify-between items-center flex-col lg:flex-row md:flex-row mt-6">
@@ -63,7 +80,7 @@ const CreatedGroup = () => {
               </p>
               <Link
                 to={`/dashboard/group-savings/${info.goalId}`}
-                className="flex justify-center items-center border rounded-full border-primary p-2 text-[12px] w-[100%] mb-3"
+                className="flex justify-center items-center text-center border rounded-full border-primary p-2 text-[12px] w-[100%] mb-3"
               >
                 View Details
               </Link>

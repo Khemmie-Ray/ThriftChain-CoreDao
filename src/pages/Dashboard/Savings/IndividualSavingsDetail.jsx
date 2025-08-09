@@ -8,6 +8,7 @@ import useFetchIndividual from "../../../hooks/useFetchIndividual";
 import tokenList from "../../../constants/tokenList.json";
 import { formatUnits } from "ethers";
 import Save from "../../../components/dashboard/Save";
+import Loader from "../../../components/loaders/Loader";
 
 const IndividualSavingsDetail = () => {
   const { id } = useParams();
@@ -15,7 +16,7 @@ const IndividualSavingsDetail = () => {
   const { address } = location.state || {};
   const { singleThriftUser } = useFetchIndividual();
   if (!singleThriftUser || singleThriftUser.length === 0) {
-    return <p className="p-4">Loading individual savings data...</p>;
+    return <Loader />;
   }
 
   const selectedGoal = singleThriftUser?.find(

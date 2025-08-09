@@ -4,9 +4,10 @@ import { PiVaultBold } from "react-icons/pi";
 import useFetchIndividual from "../../hooks/useFetchIndividual";
 import tokenList from "../../constants/tokenList.json";
 import { formatUnits } from "ethers";
+import LoadingSpinner from "../loaders/LoadingSpinner";
 
 const HistoryCard = () => {
-  const { singleThriftUser } = useFetchIndividual();
+  const { singleThriftUser, loading } = useFetchIndividual();
 
   const getTokenDecimals = (currencyAddress) => {
     const token = tokenList[currencyAddress];
@@ -32,6 +33,23 @@ const HistoryCard = () => {
       day: "numeric",
     });
   };
+
+  if (loading) {
+    return (
+      <div className="w-full flex justify-center items-center py-6">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  if (!loading && (!singleThriftUser || singleThriftUser.length === 0)) {
+    return (
+      <div className="w-full flex justify-center items-center py-6">
+        <p className="text-gray-500">No savings history found.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="w-[100%] flex justify-between items-center flex-col mt-6">
       {singleThriftUser.map((info) => {

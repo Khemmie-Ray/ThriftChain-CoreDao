@@ -1,24 +1,27 @@
 import React, { useEffect, useCallback } from 'react'
 import Sidebar from '../components/dashboard/Sidebar'
-import { Outlet, useNavigate }from 'react-router'
+import { Outlet, useNavigate, useLocation }from 'react-router'
 import MobileSidebar from '../components/dashboard/MobileSidebar'
 import { useAppKitAccount } from '@reown/appkit/react'
 
 const DashboardLayout = () => {
-  const { isConnected } = useAppKitAccount();
+  const { isConnected, status } = useAppKitAccount();
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleRedirect = useCallback(async () => {
-    if (isConnected) {
-      navigate("/dashboard");
-    } else {
-      navigate("/");
+  const handleRedirect = useCallback(() => {
+    if (status === 'connecting') return;
+
+    if (!isConnected) {
+      navigate("/"); 
+    } else if (isConnected && !location.pathname.startsWith("/dashboard")) {
+      navigate("/dashboard"); 
     }
-  }, [isConnected, navigate]);
+  }, [isConnected, location.pathname, navigate]);
 
   useEffect(() => {
     handleRedirect();
-  }, [handleRedirect, isConnected]);
+  }, [handleRedirect]);
 
   return (
     <div>

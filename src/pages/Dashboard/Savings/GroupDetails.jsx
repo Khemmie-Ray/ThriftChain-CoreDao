@@ -8,15 +8,17 @@ import useFetchGroups from "../../../hooks/useFetchGroups";
 import tokenList from "../../../constants/tokenList.json";
 import { formatUnits } from "ethers";
 import Join from "../../../components/dashboard/Join";
+import Loader from "../../../components/loaders/Loader";
 
 const GroupDetails = () => {
   const { id } = useParams();
   const location = useLocation();
   const { address } = location.state || {};
-  const { groupThriftUser } = useFetchGroups();
+  const { groupThriftUser, loading } = useFetchGroups();
   if (!groupThriftUser || groupThriftUser.length === 0) {
-    return <p className="p-4">Loading individual savings data...</p>;
+    return <Loader />;
   }
+
   console.log(address)
 
   const selectedGoal = groupThriftUser?.find(

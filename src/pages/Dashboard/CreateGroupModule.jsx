@@ -4,6 +4,7 @@ import { ethers, parseUnits } from "ethers";
 import useCreateThrift from "../../hooks/useCreateThrift";
 import { toast } from "react-toastify";
 import tokenList from "../../constants/tokenList.json";
+import { useNavigate } from "react-router";
 
 const CreateGroupModule = () => {
   const [goalName, setGoalName] = useState("");
@@ -13,6 +14,7 @@ const CreateGroupModule = () => {
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [participant, setParticipant] = useState(1);
+  const navigate = useNavigate()
 
   const handleCreate = useCreateThrift();
 
@@ -63,6 +65,7 @@ const CreateGroupModule = () => {
     setEndTime("");
     setVaultAddress("");
     setSavingFrequency("");
+    navigate("/dashboard/group-savings")
   };
 
   return (
