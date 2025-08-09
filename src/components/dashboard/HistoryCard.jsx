@@ -75,7 +75,7 @@ const HistoryCard = () => {
             <Link
               to={`/dashboard/individual-savings/${info.goalId}`}
               state={{ address: info.address }} 
-              className="flex justify-center items-center border rounded-full border-primary p-2 text-[12px] lg:w-[25%] md:w-[25%] w-[100%] mb-3"
+              className="flex justify-center items-center border rounded-full border-primary p-2 text-[12px] lg:w-[25%] md:w-[25%] w-[100%] mb-3 text-center"
             >
               View Details
             </Link>

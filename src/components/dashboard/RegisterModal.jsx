@@ -8,12 +8,6 @@ const RegisterModal = () => {
   const [isLister, setIslister] = useState("");
   const handleRegister = useRegister();
 
-  const handleSignup = async () => {
-    await handleRegister(username, isLister);
-    setIslister("");
-    setUsername("");
-  };
-
   function open() {
     setIsOpen(true);
   }
@@ -22,6 +16,14 @@ const RegisterModal = () => {
     setIsOpen(false);
   }
 
+  const handleSignup = async () => {
+    await handleRegister(username, isLister);
+    setIslister("");
+    setUsername("");
+    close()
+  };
+
+ 
   return (
     <>
       <Button

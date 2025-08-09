@@ -9,8 +9,8 @@ import { useThriftData } from "../../context/ThriftContextProvider";
 const Dashboard = () => {
   const [selectedTab, setSelectedTab] = useState("thrifter");
   // const { allSingle, allGroup, groupUser, singleUser } = useThriftData();
-  const { allGroup, groupUser } = useThriftData()
-  console.log(allGroup, groupUser)
+  const { allGroup, groupUser, singleUser } = useThriftData()
+  console.log(allGroup, groupUser, singleUser, "Wahala")
 
   const selectedStyle = "bg-[#6138FE] text-white";
   const defaultStyle = "text-[#5E6074]";

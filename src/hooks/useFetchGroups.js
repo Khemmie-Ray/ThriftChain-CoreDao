@@ -12,7 +12,6 @@ const useFetchGroups = () => {
   const { readOnlyProvider } = useSignerOrProvider();
   const [groupThriftAll, setGroupThriftAll] = useState([]);
   const [groupThriftUser, setGroupThriftUser] = useState([]);
-  console.log(chainId)
 
   const itf = useMemo(() => new Interface(ABI), []);
   const multicallAddr = import.meta.env.VITE_MULTICALL2_ADDRESS;
