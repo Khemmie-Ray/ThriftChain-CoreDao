@@ -1,36 +1,25 @@
 import { useCallback } from "react";
-import useContractInstance from "./useContractInstance";
 import { useAppKitAccount, useAppKitNetwork } from "@reown/appkit/react";
 import { coreTestnet2  } from "@reown/appkit/networks";
 import { toast } from "react-toastify";
 import { ErrorDecoder } from "ethers-decode-error";
 import abi from "../constants/abi.json";
+import tokenAbi from "../constants/singlethriftAbi.json"
+import { useThriftData } from "../context/ThriftContextProvider";
+import useSignerOrProvider from "./useSignerOrProvider";
+import { Contract } from "ethers";
 
-const useCreateThrift = () => {
-  const contract = useContractInstance(true);
+const useSaveIndividual = () => {
   const { address } = useAppKitAccount();
   const { chainId } = useAppKitNetwork();
   const errorDecoder = ErrorDecoder.create([abi]);
+  const { allSingle, singleUser } = useThriftData();
+  const { signer } = useSignerOrProvider()
+  console.log(allSingle, singleUser)
 
   return useCallback(
-    async (
-      goalName,
-      goalAmount,
-      frequency,
-      vaultAddress,
-      startTime,
-      endTime,
-      participant
-    ) => {
-      if (
-        !goalName ||
-        !goalAmount ||
-        frequency === "" ||
-        !vaultAddress ||
-        !startTime ||
-        !endTime ||
-        participant === null || participant === undefined
-      ) {
+    async (username, assetLister) => {
+      if (!username && !assetLister) {
         toast.error("Invalid Input");
         return;
       }
@@ -51,27 +40,30 @@ const useCreateThrift = () => {
       }
 
       try {
-        const tx = await contract.createThrift(
-          goalName,
-          goalAmount,
-          frequency,
-          vaultAddress,
-          startTime,
-          endTime,
-          participant
+        const ercContract = new ethers.Contract(
+            import.meta.env.VITE_TOKEN_ADDRESS,
+            tokenAbi,
+            signer
+          );
+
+        const contract = new ethers.Contract(
+            import.meta.env.VITE_TOKEN_ADDRESS,
+            tokenAbi,
+            signer
         );
+        const value = ethers.utils.parseEther(amount); 
+        const tx = await contract.saveForGoal(address, { value });
+        console.log(tx);
         const receipt = await tx.wait();
-
+  
         if (receipt.status === 1) {
-          toast.success("New module creation Successful");
-          return;
+          toast.success("Saved successfully");
+        } else {
+          toast.error("Save failed");
         }
-
-        toast.error("New module creation failed");
-        return;
       } catch (err) {
         const decodedError = await errorDecoder.decode(err);
-        toast.error(`New module creation failed - ${decodedError.reason}`, {
+        toast.error(`Registration failed - ${decodedError.reason}`, {
           position: "top-center",
         });
       }
@@ -80,4 +72,4 @@ const useCreateThrift = () => {
   );
 };
 
-export default useCreateThrift;
+export default useSaveIndividual;

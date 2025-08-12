@@ -44,7 +44,7 @@ const Join = ({ address }) => {
       }
 
       if (Number(chainId) !== Number(coreTestnet2 .id)) {
-        toast.error("You're not connected to Base Sepolia");
+        toast.error("You're not connected to Core Testnet2");
         return;
       }
 

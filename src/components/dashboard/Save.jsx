@@ -1,21 +1,22 @@
 import { Button, Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useState, useCallback } from "react";
-import { Contract, ethers } from "ethers";
 import { useAppKitAccount, useAppKitNetwork } from "@reown/appkit/react";
 import { coreTestnet2  } from "@reown/appkit/networks";
 import { toast } from "react-toastify";
 import { ErrorDecoder } from "ethers-decode-error";
 import abi from "../../constants/groupthriftAbi.json";
 import useSignerOrProvider from "../../hooks/useSignerOrProvider";
+import useContractInstance from "../../hooks/useContractInstance";
 
-const Save = ({ address }) => {
+const Save = () => {
   let [isOpen, setIsOpen] = useState(false);
-  const [userAdd, setUserAdd] = useState("");
-  const [amount, setAmount] = useState("")
+  const [username, setUsername] = useState("");
+  const [userKey, setUserKey] = useState(0)
   const { isConnected } = useAppKitAccount();
   const { chainId } = useAppKitNetwork();
   const errorDecoder = ErrorDecoder.create([abi]);
   const { signer } = useSignerOrProvider();
+  const contract = useContractInstance(true)
 
   function open() {
     setIsOpen(true);
@@ -25,10 +26,8 @@ const Save = ({ address }) => {
     setIsOpen(false);
   }
 
-  const contract = new ethers.Contract(address, abi, signer);
-
   const handleSave = useCallback(async () => {
-    if (!userAdd || !amount || isNaN(amount)) {
+    if (!userAdd) {
       toast.error("Invalid address or amount");
       return;
     }
@@ -44,13 +43,12 @@ const Save = ({ address }) => {
     }
 
     if (Number(chainId) !== Number(coreTestnet2 .id)) {
-      toast.error("You're not connected to Base Sepolia");
+      toast.error("You're not connected to Core Testnet2");
       return;
     }
 
     try {
-      const value = ethers.utils.parseEther(amount); 
-      const tx = await contract.save(userAdd, { value });
+      const tx = await contract.saveFor();
       console.log(tx);
       const receipt = await tx.wait();
 
@@ -69,17 +67,16 @@ const Save = ({ address }) => {
       setAmount("");
       close();
     }
-  }, [userAdd, amount, contract, isConnected, chainId]);
+  }, [username, userKey, contract, isConnected, chainId]);
 
   return (
-    <>
+    <div>
       <Button
         onClick={open}
-        className="bg-linear-to-r from-primary to-lilac font-[500] text-white py-3 px-6 mb-3 text-[12px] flex justify-center rounded-full hover:scale-105 items-center ml-4"
+        className="bg-linear-to-r from-primary to-lilac text-white py-3 px-6 mb-3 text-[14px] inline-flex justify-center rounded-full hover:scale-105 items-center w-[100%]"
       >
-        Save
+        Save For
       </Button>
-
       <Dialog
         open={isOpen}
         as="div"
@@ -96,15 +93,23 @@ const Save = ({ address }) => {
                 as="h3"
                 className="text-base/7 font-medium text-white text-[24px] text-center my-6"
               >
-                Save
+                Save for a user
               </DialogTitle>
-              <p className="mb-2">Creator Address</p>
+              <p className="mb-2">UserName</p>
               <input
                 type="text"
-                placeholder="Enter User address"
+                placeholder="Enter Username"
                 className="border mb-4 border-white/20 w-[100%] rounded-md hover:outline-0 p-3"
-                onChange={(e) => setUserAdd(e.target.value)}
-                value={userAdd}
+                onChange={(e) => setUsername(e.target.value)}
+                value={username}
+              />
+               <p className="mb-2">User Key</p>
+              <input
+                type="text"
+                placeholder="Enter User unique identifier"
+                className="border mb-4 border-white/20 w-[100%] rounded-md hover:outline-0 p-3"
+                onChange={(e) => setUserKey(e.target.value)}
+                value={userKey}
               />
 
               <div className="mt-4">
@@ -119,7 +124,7 @@ const Save = ({ address }) => {
           </div>
         </div>
       </Dialog>
-    </>
+    </div>
   );
 };
 

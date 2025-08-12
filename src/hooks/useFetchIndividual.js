@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import multicallAbi from "../constants/multicallabi.json";
-import { useAppKitAccount, useAppKitNetwork, useAppKitProvider } from "@reown/appkit/react";
+import { useAppKitNetwork } from "@reown/appkit/react";
 import ABI from "../constants/singlethriftAbi.json";
 import { useThriftData } from "../context/ThriftContextProvider";
 import useSignerOrProvider from "./useSignerOrProvider";

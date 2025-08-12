@@ -9,15 +9,21 @@ import tokenList from "../../../constants/tokenList.json";
 import { formatUnits } from "ethers";
 import Save from "../../../components/dashboard/Save";
 import Loader from "../../../components/loaders/Loader";
+import Saveindividual from "../../../components/dashboard/Saveindividual";
+import { useAppKitAccount } from "@reown/appkit/react";
+import Withdraw from "../../../components/dashboard/Withdraw";
 
 const IndividualSavingsDetail = () => {
   const { id } = useParams();
   const location = useLocation();
-  const { address } = location.state || {};
+  const { thriftAddress } = location.state || {};
   const { singleThriftUser } = useFetchIndividual();
+  // const { address } = useAppKitAccount()
   if (!singleThriftUser || singleThriftUser.length === 0) {
     return <Loader />;
   }
+  console.log("Help:", thriftAddress)
+
 
   const selectedGoal = singleThriftUser?.find(
     (item) => item.goalId === Number(id)
@@ -81,10 +87,15 @@ const IndividualSavingsDetail = () => {
           </h2>
         </div>
         <div className="flex items-center">
-          <Save address={address} />
-          <button className="border rounded-full border-primary py-3 px-6 ml-3 text-[12px] mb-3">
-            Withdraw
-          </button>
+          <div className="w-2/5">
+          <Save />
+          </div>
+          <div className="1/5">
+          <Saveindividual thriftAddress={thriftAddress} />
+          </div>
+          <div className="1/5">
+          <Withdraw thriftAddress={thriftAddress} />
+          </div>
         </div>
       </section>
       <section className="lg:px-8 md:px-8 px-4">
