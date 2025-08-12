@@ -82,8 +82,7 @@ const CreateGroupModule = () => {
         <div className="w-[100%] lg:w-[50%] md:w-[60%] mx-auto my-8">
           <div className="my-4">
             <label className="text-[14px] font-[500]">
-              Savings title OR Add asset saved from the marketplace cart or
-              wishlist
+              Savings title 
             </label>
             <input
               type="text"
