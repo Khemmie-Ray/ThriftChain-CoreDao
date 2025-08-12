@@ -65,3 +65,7 @@
 .custom-range:focus {
   outline: none;
 }
+
+.contain {
+  max-width: 1700px;
+}
