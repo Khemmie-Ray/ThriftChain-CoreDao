@@ -37,7 +37,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className=" h-[100vh] text-textGrey hidden lg:flex md:flex flex-col">
+    <div className=" h-[100vh] text-textGrey hidden lg:flex md:flex flex-col bg-darker overflow-y-auto max-h-[1100px]">
       <div className="mb-20 border-b border-[#303030]">
         <img src={logo} alt="logo" className="w-[100%] p-6" />
       </div>

@@ -63,7 +63,7 @@ const RegisterModal = () => {
               <select
                 name=""
                 id=""
-                className="border border-white/20 w-[100%] rounded-md hover:outline-0 p-3 mb-4"
+                className="border border-white/20 w-[100%] rounded-md hover:outline-0 p-3 mb-4 bg-black"
                 onChange={(e) => setIslister(e.target.value)}
                 value={isLister}
               >

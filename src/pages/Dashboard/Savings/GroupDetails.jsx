@@ -74,7 +74,6 @@ const GroupDetails = () => {
         <Link to="/dashboard/individual-savings" className="flex items-center">
           <IoIosArrowBack className="mr-3" /> Back
         </Link>
-        <p>Export savings history as a csv file</p>
       </div>
       <section className="flex justify-between lg:px-8 md:px-8 px-4 items-center flex-col lg:flex-row md:flex-row">
         <div className="mb-3">
