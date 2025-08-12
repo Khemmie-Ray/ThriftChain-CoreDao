@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { DashNav, Button } from "../../components/shared/Reuse";
-import { ethers, parseUnits } from "ethers";
+import { ethers} from "ethers";
 import useCreateThrift from "../../hooks/useCreateThrift";
 import { toast } from "react-toastify";
 import tokenList from "../../constants/tokenList.json";

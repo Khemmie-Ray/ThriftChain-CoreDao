@@ -4,5 +4,42 @@
         "symbol": "MTK",
         "decimals": 18,
         "address": "0x38b0917178b0C07bEAAf9c6255Ad97C1c9D984EE"
+    },
+
+    "0x546a07F7E5Ec6EAf22201486b4116cF87aE170aa": {
+        "name": "WrappedBitCoin",
+        "symbol": "wBTC",
+        "decimals": 18,
+        "address": "0x546a07F7E5Ec6EAf22201486b4116cF87aE170aa"
+    },
+    "0xa570d6A7310b1D62848a7C64A33d65b208199ebe": {
+        "name": "TestCoin",
+        "symbol": "TEST",
+        "decimals": 18,
+        "address": "0xa570d6A7310b1D62848a7C64A33d65b208199ebe"
+    }, 
+    "0xD334C474B7F5C2dD3cD5de75858229bA8Ba87196":{
+        "name": "TetherUSD",
+        "symbol": "USDT",
+        "decimals": 18,
+        "address": "0xD334C474B7F5C2dD3cD5de75858229bA8Ba87196"
+    },
+    "0x6C475841d1D7871940E93579E5DBaE01634e17aA":{
+        "name": "ChainLinkToken",
+        "symbol": "LINK",
+        "decimals": 18,
+        "address": "0x6C475841d1D7871940E93579E5DBaE01634e17aA"
+    },
+    "0xc0CE50D42f97869B135B25b6071E2A24Cee7aA15":{
+        "name": "MockUsdcCoin",
+        "symbol": "mUSDC",
+        "decimals": 18,
+        "address": "0xc0CE50D42f97869B135B25b6071E2A24Cee7aA15"
+    },
+    "0x6924a3828952867F713D25a949D34B81c9836653":{
+        "name": "LiquidStakedCore",
+        "symbol": "stCORE",
+        "decimals": 18,
+        "address": "0x6924a3828952867F713D25a949D34B81c9836653"
     }
 }
