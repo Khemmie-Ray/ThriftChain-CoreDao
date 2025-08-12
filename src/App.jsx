@@ -46,7 +46,7 @@ const router = createBrowserRouter(
 
 const App = () => {
   return (
-     <div className="contain mx-auto font-dmsans text-[16px] text-dark">
+     <div className="contain mx-auto font-dmsans text-[16px] text-dark w-[100%]">
       <ThriftContextProvider>
          <RouterProvider router={router} />
          </ThriftContextProvider>
